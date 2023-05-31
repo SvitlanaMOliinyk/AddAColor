@@ -6,7 +6,7 @@ export const Login = () => {
   const navigate = useNavigate();
   const onSubmit = () => {
       const { userName, password } = values;
-        fetch("http://localhost:8080/api/user/login", {
+        fetch(`${import.meta.env.VITE_BASE_URL_USER}/login`, {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -54,7 +54,7 @@ export const Login = () => {
             </div>
             <div className="register-field">
                 <input
-                  type="text"
+                  type="password"
                   {...getFieldProps("password")}
                   placeholder="Password"
                   className="login-input"
