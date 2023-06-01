@@ -4,9 +4,19 @@ import { RequestHandler } from "express";
 import User from "../models/User.js";
 import bcrypt from "bcrypt";
 
-export const getUsers: RequestHandler = async (req, res) => {
+export const getAuthenticatedUser: RequestHandler = async (req, res) => {
+  const authenticatedUserId = req.session.userId;
   try {
-    const user = await User.find().exec();
+    if (!authenticatedUserId) {
+      res.status(401).json({
+        success: false,
+        msg: "User not authenticated!",
+      });
+      return;
+    }
+    const user = await User.findById(authenticatedUserId)
+      .select("+email")
+      .exec();
     res.status(200).json(user);
   } catch (error) {
     console.error(error);
@@ -103,7 +113,7 @@ export const loginUser: RequestHandler<
       return;
     }
     const passwordMatch = await bcrypt.compare(password, user.password);
-    if (!password) {
+    if (!passwordMatch) {
       res.status(400).json({ success: false, msg: "Wrong Credentials!" });
       return;
     }
@@ -116,4 +126,15 @@ export const loginUser: RequestHandler<
       .status(500)
       .json({ success: false, msg: "Unable to login user, try again later" });
   }
+};
+
+export const logoutUser: RequestHandler = async (req, res) => {
+  req.session.destroy((error) => {
+    if (error) {
+      console.error(error);
+      res.status(500).json({ error: error.message });
+    } else {
+      res.sendStatus(200);
+    }
+  });
 };

@@ -1,7 +1,7 @@
 
 import { Link } from "react-router-dom";
-import Section from "./Section.tsx";
-import List from "./List.tsx";
+import Section from "../components/Section.tsx";
+import List from "../components/List.tsx";
 
 export const About = () => {
   return (
