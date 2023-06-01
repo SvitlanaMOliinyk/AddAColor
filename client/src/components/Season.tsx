@@ -18,7 +18,7 @@ export const Season = () => {
   useEffect(() => {
     async function loadSeason() {
       try {
-        const response = await fetch(`${import.meta.env.VITE_BASE_URL_PALETTE}/${key}`, { method: "GET" });
+        const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/palette/${key}`, { method: "GET" });
         const responsePalette = await response.json()
         console.log("responsePalette:", responsePalette.result)
         setPalette(responsePalette.result);

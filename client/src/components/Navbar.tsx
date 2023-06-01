@@ -1,17 +1,42 @@
 import { ReactElement } from "react";
 import { NavLink } from "react-router-dom";
+import { UserModel } from "./models/userModel.ts";
 
-type NavbarProps = { title: string };
+interface NavbarProps {
+  loggedInUser: UserModel | null;
+  onLogout: () => void;
+}
 
-function Navbar({ title }: NavbarProps): ReactElement {
+function Navbar({ loggedInUser, onLogout }: NavbarProps): ReactElement {
+  
+  async function logout() {
+    try {
+      await fetch(`${import.meta.env.VITE_BASE_URL}/api/user/logout`, {
+        method: "POST",
+      });
+      onLogout();
+    } catch (error) {
+      console.error(error);
+      alert(error);
+    }
+  }
+
   return (
     <nav className="shadow-navbar">
-      <div className="logo">{title}</div>
-<div className="navlinks">
-      <NavLink to="/">Home</NavLink>
-      <NavLink to="about">About</NavLink>
-      <NavLink to="register">Register</NavLink>
-      <NavLink to="login">Log in</NavLink>
+      <div className="logo">LOGO</div>
+      <div className="navlinks">
+        <NavLink to="/">Home</NavLink>
+        <NavLink to="about">About</NavLink>
+        {loggedInUser ? (
+          <NavLink to="/" onClick={logout}>
+            Log Out
+          </NavLink>
+        ) : (
+          <>
+            <NavLink to="/register">Register</NavLink>
+            <NavLink to="/login">Log In</NavLink>
+          </>
+        )}
       </div>
     </nav>
   );

@@ -1,23 +1,33 @@
 import { useNavigate, Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { UserModel } from "./models/userModel.ts";
 
-export const Login = () => {
+interface LoginProps {
+  onLoginSuccessful: (user: UserModel) => void;
+}
+
+export const Login = ({ onLoginSuccessful }: LoginProps) => {
   const navigate = useNavigate();
-  const onSubmit = () => {
-      const { userName, password } = values;
-        fetch(`${import.meta.env.VITE_BASE_URL_USER}/login`, {
+  const onSubmit = async () => {
+    const { userName, password } = values;
+    const response = await fetch(
+      `${import.meta.env.VITE_BASE_URL}/api/user/login`,
+      {
         method: "POST",
         headers: {
           "content-type": "application/json",
         },
         body: JSON.stringify({ userName, password }),
-      });
-
-      setTimeout(() => {
-          navigate("/");
-        }, 2000);
-}
+      }
+    );
+    const user = await response.json();
+    console.log("User after log in:", user)
+    onLoginSuccessful(user);
+    setTimeout(() => {
+      navigate("/");
+    }, 2000);
+  };
 
   const validationSchema = Yup.object({
     userName: Yup.string().required("Please enter your name!"),
@@ -26,7 +36,7 @@ export const Login = () => {
 
   const { values, errors, touched, getFieldProps, handleSubmit } = useFormik({
     initialValues: {
-        userName: "",
+      userName: "",
       password: "",
     },
     validationSchema,
@@ -35,44 +45,48 @@ export const Login = () => {
 
   return (
     <main className="content login">
-      <form onSubmit={handleSubmit} className="register-form" autoComplete="off">
-      <div className="register-field">
-                <input
-                  type="text"
-                  {...getFieldProps("userName")}
-                  placeholder="User Name"
-                  className="login-input"
-                ></input>
+      <form
+        onSubmit={handleSubmit}
+        className="register-form"
+        autoComplete="off"
+      >
+        <div className="register-field">
+          <input
+            type="text"
+            {...getFieldProps("userName")}
+            placeholder="User Name"
+            className="login-input"
+          ></input>
 
-              <div className="message-container">
-                {touched.userName && errors.userName ? (
-                  <>{errors.userName}</>
-                ) : (
-                  <> </>
-                )}
-              </div>
-            </div>
-            <div className="register-field">
-                <input
-                  type="password"
-                  {...getFieldProps("password")}
-                  placeholder="Password"
-                  className="login-input"
-                ></input>
+          <div className="message-container">
+            {touched.userName && errors.userName ? (
+              <>{errors.userName}</>
+            ) : (
+              <> </>
+            )}
+          </div>
+        </div>
+        <div className="register-field">
+          <input
+            type="password"
+            {...getFieldProps("password")}
+            placeholder="Password"
+            className="login-input"
+          ></input>
 
-              <div className="message-container">
-                {touched.password && errors.password ? (
-                  <>{errors.password}</>
-                ) : (
-                  <> </>
-                )}
-              </div>
-            </div>
-            <button type="submit">Log in</button>
-            <div className="register-link">
-              <Link to={"/register"}> Register a new account here</Link>
-            </div>
+          <div className="message-container">
+            {touched.password && errors.password ? (
+              <>{errors.password}</>
+            ) : (
+              <> </>
+            )}
+          </div>
+        </div>
+        <button type="submit">Log in</button>
+        <div className="register-link">
+          <Link to={"/register"}> Register a new account here</Link>
+        </div>
       </form>
     </main>
-  )
-}
+  );
+};
