@@ -14,6 +14,7 @@ export const Register = ({ onRegisterSuccessful }: RegisterProps) => {
     console.log("Url:", `${import.meta.env.VITE_BASE_URL}/api/user`);
     const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/user`, {
       method: "POST",
+      credentials: "include",
       headers: {
         "content-type": "application/json",
       },

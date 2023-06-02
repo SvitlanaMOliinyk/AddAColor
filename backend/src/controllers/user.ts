@@ -15,8 +15,9 @@ export const getAuthenticatedUser: RequestHandler = async (req, res) => {
       return;
     }
     const user = await User.findById(authenticatedUserId)
-      .select("+email")
+      .select("+email + userName")
       .exec();
+      console.log("User credential cookie", user)
     res.status(200).json(user);
   } catch (error) {
     console.error(error);
@@ -106,7 +107,7 @@ export const loginUser: RequestHandler<
       return;
     }
     const user = await User.findOne({ userName: userName })
-      .select("password + email")
+      .select("password + email + userName")
       .exec();
     if (!user) {
       res.status(401).json({ success: false, msg: "Wrong Credentials!" });

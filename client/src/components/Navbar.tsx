@@ -28,9 +28,12 @@ function Navbar({ loggedInUser, onLogout }: NavbarProps): ReactElement {
         <NavLink to="/">Home</NavLink>
         <NavLink to="about">About</NavLink>
         {loggedInUser ? (
+          <>
+          <NavLink to="/profile">Profile</NavLink>
           <NavLink to="/" onClick={logout}>
             Log Out
           </NavLink>
+          </>
         ) : (
           <>
             <NavLink to="/register">Register</NavLink>

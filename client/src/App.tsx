@@ -7,6 +7,7 @@ import { Login } from "./components/Login.tsx"
 import { Season } from "./components/Season.tsx"
 import { Register } from "./components/Register.tsx"
 import { UserModel } from "./components/models/userModel.ts"
+import { Profile } from "./pages/Profile.tsx"
 
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
     try {
     const response = await fetch("/api/user", { method: "GET" });
     const responseResult = await response.json()
-        console.log("responsePalette:", responseResult)
+        console.log("responseUser:", responseResult)
         setLoggedInUser(responseResult) 
 } catch(error){
   console.error(error);
@@ -38,6 +39,7 @@ getLoggedInUser()
     <Route path="/" element={<Home />}/>
     <Route path="/about/:key" element={<Season />}/>
     <Route path="/about" element={<About />}/>
+    <Route path="/profile" element={<Profile loggedInUser={loggedInUser}/>}/>
     <Route path="/register" element={<Register onRegisterSuccessful={(user) => {setLoggedInUser(user)}}/>}/>
     <Route path="/login" element={<Login onLoginSuccessful={(user) => {setLoggedInUser(user)}}/>}/>
    </Routes>

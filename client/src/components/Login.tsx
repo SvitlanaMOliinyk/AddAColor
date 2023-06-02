@@ -15,6 +15,7 @@ export const Login = ({ onLoginSuccessful }: LoginProps) => {
       `${import.meta.env.VITE_BASE_URL}/api/user/login`,
       {
         method: "POST",
+        credentials: "include",
         headers: {
           "content-type": "application/json",
         },
