@@ -36,7 +36,7 @@ getLoggedInUser()
    <Navbar loggedInUser={loggedInUser}
 					onLogout={() => setLoggedInUser(null)}/>
    <Routes>
-    <Route path="/" element={<Home />}/>
+    <Route path="/" element={<Home loggedInUser={loggedInUser}/>}/>
     <Route path="/about/:key" element={<Season />}/>
     <Route path="/about" element={<About />}/>
     <Route path="/profile" element={<Profile loggedInUser={loggedInUser}/>}/>

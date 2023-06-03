@@ -17,7 +17,7 @@ export const getAuthenticatedUser: RequestHandler = async (req, res) => {
     const user = await User.findById(authenticatedUserId)
       .select("+email + userName")
       .exec();
-      console.log("User credential cookie", user)
+    console.log("User credential cookie", user);
     res.status(200).json(user);
   } catch (error) {
     console.error(error);
@@ -25,7 +25,27 @@ export const getAuthenticatedUser: RequestHandler = async (req, res) => {
   }
 };
 
-interface createUserBody {
+export const getUserPhoto: RequestHandler = async (req, res) => {
+  const { id } = req.params;
+  console.log("user ID:", req.params);
+  try {
+    if (!id) {
+      res.status(401).json({
+        success: false,
+        msg: "User not authenticated!",
+      });
+      return;
+    }
+    const userPhoto = await User.findById(id).select("userPicture").exec();
+    console.log("User picture", userPhoto);
+    res.status(200).json(userPhoto);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error.message });
+  }
+};
+
+interface createUser {
   userName?: string;
   email?: string;
   password?: string;
@@ -33,10 +53,10 @@ interface createUserBody {
 export const createUser: RequestHandler<
   unknown,
   unknown,
-  createUserBody,
+  createUser,
   unknown
 > = async (
-  req: Request<unknown, unknown, createUserBody, unknown>,
+  req: Request<unknown, unknown, createUser, unknown>,
   res: Response
 ) => {
   const username = req.body.userName;
@@ -138,4 +158,47 @@ export const logoutUser: RequestHandler = async (req, res) => {
       res.sendStatus(200);
     }
   });
+};
+
+interface updateUser {
+  userPicture?: string;
+  userName?: string;
+}
+export const updateUser: RequestHandler<
+  unknown,
+  unknown,
+  updateUser,
+  unknown
+> = async (
+  req: Request<unknown, unknown, updateUser, unknown>,
+  res: Response
+) => {
+  const userName = req.body.userName;
+  console.log("userName", userName);
+  const userPicture = req.body.userPicture;
+
+  try {
+    if (!userPicture) {
+      res.status(400).json({
+        success: false,
+        msg: "You need to provide your picture!",
+      });
+      return;
+    }
+
+    const updatedUser = await User.findOneAndUpdate(
+      { userName: userName },
+      {
+        $set: {
+          userPicture: userPicture,
+        },
+      },
+      { new: true }
+    );
+    req.session.userId = updatedUser._id;
+    res.status(201).json(updatedUser);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error.message });
+  }
 };

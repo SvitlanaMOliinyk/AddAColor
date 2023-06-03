@@ -1,11 +1,15 @@
 import { useState, useEffect, ChangeEvent, } from "react";
+import { useNavigate } from "react-router-dom";
+import { UserModel } from "../components/models/userModel.ts";
 
-// type ImageParams = { image: File | Blob };
+interface HomeProps{
+  loggedInUser:  UserModel | null;
+}
 
-
-function Home() {
+function Home({loggedInUser}: HomeProps) {
   const [image, setImage] = useState<File | null>(null);
   const [imageUrl, setImageUrl] = useState<string | ArrayBuffer | null>(null);
+  const navigate = useNavigate();
 
 const handleConvertToBase64 = (event: ChangeEvent<HTMLInputElement>) => {
     console.log("File event:", event);
@@ -35,6 +39,23 @@ const handleConvertToBase64 = (event: ChangeEvent<HTMLInputElement>) => {
       }
     };
   }, [image]);
+
+  useEffect(() => {
+    if(imageUrl && loggedInUser){
+    fetch(`${import.meta.env.VITE_BASE_URL}/api/user/update`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+        Accept: "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify({ userPicture: imageUrl, userName: loggedInUser.userName }),
+    }).then((response) => console.log("Your picture is added:", response));
+    setTimeout(() => {
+      navigate("/profile");
+    }, 2000);
+  }
+  }, [imageUrl])
 
   return (
     <main className="home content">

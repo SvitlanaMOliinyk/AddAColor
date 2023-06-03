@@ -117,3 +117,11 @@ ul{
 .register-link{
   align-self: center;
 }
+. background-test-one{
+  background-color: blue;
+}
+
+.background-test-two{
+  
+  background-color: orange;
+}
