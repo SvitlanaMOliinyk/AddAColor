@@ -57,7 +57,7 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-.upload-photo{
+.upload-photo {
   max-width: 60%;
   margin: auto;
   display: flex;
@@ -65,18 +65,18 @@ button:focus-visible {
   gap: 1rem;
 }
 
-.upload-photo h1{
+.upload-photo h1 {
   align-self: center;
 }
 
-.home-page-button{
+.home-page-button {
   margin-top: 2rem;
 }
-.content{
+.content {
   padding: 2rem 3rem;
 }
 
-.shadow-navbar{
+.shadow-navbar {
   margin-top: 0;
   height: 10vh;
   min-width: 100vw;
@@ -84,21 +84,21 @@ button:focus-visible {
   display: flex;
   justify-content: space-between;
 }
-.navlinks, .logo{
+.navlinks,
+.logo {
   padding: 1.5rem;
 }
-.shadow-navbar a{
-margin-left: 3rem;
-color: grey;
-font-size: larger;
+.shadow-navbar a {
+  margin-left: 3rem;
+  color: grey;
+  font-size: larger;
 }
-ul{
-
+ul {
 }
-.silver{
-  color: silver
+.silver {
+  color: silver;
 }
-.register-form{
+.register-form {
   max-width: 70%;
   margin: auto;
   display: flex;
@@ -106,14 +106,30 @@ ul{
   gap: 0.5rem;
 }
 
-.register-field{
+.register-field {
   max-width: 100%;
   display: flex;
   flex-direction: column;
 }
-.message-container{
+.message-container {
   color: red;
 }
-.register-link{
+.register-link {
   align-self: center;
+}
+.photo-section {
+  display: flex;
+  gap: 2rem;
+}
+
+.background-test-one {
+  height: 30vh;
+  background-color: blue;
+  margin-top: -0.4rem;
+}
+
+.background-test-two {
+  height: 30vh;
+  background-color: orange;
+  margin-top: -0.4rem;
 }

@@ -6,7 +6,7 @@ import paletteRouts from "./routes/palette.js";
 import session from "express-session";
 import env from "./util/validateEnv.js";
 import MongoStore from "connect-mongo";
-import cookieParser from 'cookie-parser';
+import cookieParser from "cookie-parser";
 
 const app = express();
 
@@ -48,6 +48,5 @@ app.get("/api/test-cookie", (req, res) => {
 app.use((req, res, next) => {
   next(Error("Endpoint not found"));
 });
-
 
 export default app;
