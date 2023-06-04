@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 import { NavLink } from "react-router-dom";
-import { UserModel } from "./models/userModel.ts";
+import { UserModel } from "../models/userModel.ts";
 
 interface NavbarProps {
   loggedInUser: UserModel | null;

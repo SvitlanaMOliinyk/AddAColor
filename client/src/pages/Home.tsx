@@ -1,6 +1,6 @@
 import { useState, useEffect, ChangeEvent, } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserModel } from "../components/models/userModel.ts";
+import { UserModel } from "../models/userModel.ts";
 
 interface HomeProps{
   loggedInUser:  UserModel | null;

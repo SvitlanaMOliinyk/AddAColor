@@ -20,8 +20,8 @@ export const Season = () => {
       try {
         const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/palette/${key}`, { method: "GET" });
         const responsePalette = await response.json()
-        console.log("responsePalette:", responsePalette.result)
-        setPalette(responsePalette.result);
+        console.log("responsePalette:", responsePalette)
+        setPalette(responsePalette);
       } catch (error) {
         console.error(error);
       }

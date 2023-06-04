@@ -7,7 +7,7 @@ export const getPalette: RequestHandler = async (req, res) => {
   try {
     const palette = await Palette.find({paletteName: { $regex: key, $options: "i" } }).exec();
     console.log("palette:", palette)
-    res.status(200).json({ success: true, result: palette });
+    res.status(200).json(palette);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: error.message });

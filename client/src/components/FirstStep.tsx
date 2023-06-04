@@ -8,6 +8,7 @@ export const FirstStep = ({ photo }: FirstStepProps) => {
   const [blue, setBlue] = useState<boolean>(false);
   const [orange, setOrange] = useState<boolean>(false);
   const [isClicked, setIsClicked] = useState<boolean>(false);
+  const [hue, setHue] = useState<string>("");
 
   const handleButtonClick = (e: MouseEvent) => {
     const target = e.target as HTMLButtonElement;
@@ -20,6 +21,8 @@ export const FirstStep = ({ photo }: FirstStepProps) => {
     if (target.value === "orange") {
       setOrange(true);
     }
+    setHue(target.value)
+    console.log("Target value:", target.value)
   };
   return (
     <section className="photo-section">
@@ -41,9 +44,9 @@ export const FirstStep = ({ photo }: FirstStepProps) => {
           </div>
         </>
       ) : blue ? (
-        <SecondStepBlue />
+        <SecondStepBlue photo={photo} hue={hue}/>
       ) : (
-        <SecondStepOrange />
+        <SecondStepOrange photo={photo} hue={hue}/>
       )}
     </section>
   );

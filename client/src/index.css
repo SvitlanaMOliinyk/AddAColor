@@ -133,3 +133,54 @@ ul {
   background-color: orange;
   margin-top: -0.4rem;
 }
+.background-test-blue-dark{
+  height: 30vh;
+  background-color: darkblue;
+  margin-top: -0.4rem;
+}
+
+.background-test-blue-light{
+  height: 30vh;
+  background-color: lightblue;
+  margin-top: -0.4rem;
+}
+
+.background-test-orange-dark{
+  height: 30vh;
+  background-color: darkorange;
+  margin-top: -0.4rem;
+}
+
+.background-test-orange-light{
+  height: 30vh;
+  background-color:	rgb(255, 213, 128);
+  margin-top: -0.4rem;
+}
+
+.background-test-blue-bright{
+  height: 30vh;
+  background-color:	rgb(0, 150, 255);
+  margin-top: -0.4rem;
+}
+
+.background-test-blue-gray{
+  height: 30vh;
+  background-color:		
+  rgb(102,153,204);
+  margin-top: -0.4rem;
+}
+
+.background-test-orange-bright{
+  height: 30vh;
+  background-color:		
+  rgb(255, 172, 28);
+  margin-top: -0.4rem;
+}
+
+.background-test-orange-gray{
+  height: 30vh;
+  background-color:		
+   rgb(235, 156, 92);
+  margin-top: -0.4rem;
+}
+

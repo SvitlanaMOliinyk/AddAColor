@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { UserModel } from "../components/models/userModel.ts";
+import { UserModel } from "../models/userModel.ts";
 import { FirstStep } from "../components/FirstStep.tsx";
 interface ProfileProps {
   loggedInUser: UserModel | null;

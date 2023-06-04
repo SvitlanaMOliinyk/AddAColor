@@ -1,4 +1,4 @@
-import { UserModel } from "./models/userModel.ts";
+import { UserModel } from "../models/userModel.ts";
 interface logoutProps {
     loggedInUser: UserModel | null
     onLogout: () => void;
