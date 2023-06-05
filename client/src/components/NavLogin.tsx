@@ -1,4 +1,4 @@
-import { UserModel } from "./models/userModel.ts";
+import { UserModel } from "../models/userModel.ts";
 import { NavLink } from "react-router-dom";
 
 interface NavLoginProps {

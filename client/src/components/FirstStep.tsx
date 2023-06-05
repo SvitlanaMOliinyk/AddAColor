@@ -1,26 +1,35 @@
 import { MouseEvent, useState } from "react";
-import { SecondStepBlue } from "./SecondStepBlue.tsx";
-import { SecondStepOrange } from "./SecondStepOrange.tsx";
+import { GoldSilverCheck } from "./GoldSilverCheck.tsx";
 interface FirstStepProps {
   photo: string;
+  resultValue: string;
+  hue: string;
+  metal: string;
+  chroma: string;
+  onValuesUpdated: (
+    updatedPhoto: string,
+    updatedHue: string,
+    updatedMetal: string,
+    updatedResultValue: string,
+    updatedChroma: string
+  ) => void;
 }
-export const FirstStep = ({ photo }: FirstStepProps) => {
-  const [blue, setBlue] = useState<boolean>(false);
-  const [orange, setOrange] = useState<boolean>(false);
+export const FirstStep = ({ photo, resultValue, metal, chroma, onValuesUpdated }: FirstStepProps) => {
+  // const [blue, setBlue] = useState<boolean>(false);
+  // const [orange, setOrange] = useState<boolean>(false);
   const [isClicked, setIsClicked] = useState<boolean>(false);
+  const [hue, setHue] = useState<string>("");
 
   const handleButtonClick = (e: MouseEvent) => {
     const target = e.target as HTMLButtonElement;
     if (target) {
       setIsClicked(true);
-    }
-    if (target.value === "blue") {
-      setBlue(true);
-    }
-    if (target.value === "orange") {
-      setOrange(true);
+    setHue(target.value)
+    onValuesUpdated(photo, target.value, metal, resultValue, chroma);
+    console.log("Target value:", target.value)
     }
   };
+  
   return (
     <section className="photo-section">
       {!isClicked ? (
@@ -40,10 +49,8 @@ export const FirstStep = ({ photo }: FirstStepProps) => {
             </button>
           </div>
         </>
-      ) : blue ? (
-        <SecondStepBlue />
       ) : (
-        <SecondStepOrange />
+        <GoldSilverCheck photo={photo} hue={hue} metal={metal} resultValue={resultValue} chroma={chroma} onValuesUpdated={onValuesUpdated}/>
       )}
     </section>
   );

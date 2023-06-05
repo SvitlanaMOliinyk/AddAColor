@@ -3,10 +3,6 @@
   line-height: 1.5;
   font-weight: 400;
 
-  /* color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424; */
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -132,4 +128,82 @@ ul {
   height: 30vh;
   background-color: orange;
   margin-top: -0.4rem;
+}
+.background-test-blue-dark {
+  height: 30vh;
+  background-color: darkblue;
+  margin-top: -0.4rem;
+}
+
+.background-test-blue-light {
+  height: 30vh;
+  background-color: lightblue;
+  margin-top: -0.4rem;
+}
+
+.background-test-orange-dark {
+  height: 30vh;
+  background-color: darkorange;
+  margin-top: -0.4rem;
+}
+
+.background-test-orange-light {
+  height: 30vh;
+  background-color: rgb(255, 213, 128);
+  margin-top: -0.4rem;
+}
+
+.background-test-blue-bright {
+  height: 30vh;
+  background-color: rgb(0, 150, 255);
+  margin-top: -0.4rem;
+}
+
+.background-test-blue-gray {
+  height: 30vh;
+  background-color: rgb(102, 153, 204);
+  margin-top: -0.4rem;
+}
+
+.background-test-orange-bright {
+  height: 30vh;
+  background-color: rgb(255, 172, 28);
+  margin-top: -0.4rem;
+}
+
+.background-test-orange-gray {
+  height: 30vh;
+  background-color: rgb(235, 156, 92);
+  margin-top: -0.4rem;
+}
+
+.background-test-gold {
+  height: 30vh;
+  background: radial-gradient(
+      ellipse farthest-corner at right bottom,
+      #fedb37 0%,
+      #fdb931 8%,
+      #9f7928 30%,
+      #8a6e2f 40%,
+      transparent 80%
+    ),
+    radial-gradient(
+      ellipse farthest-corner at left top,
+      #ffffff 0%,
+      #ffffac 8%,
+      #d1b464 25%,
+      #5d4a1f 62.5%,
+      #5d4a1f 100%
+    );
+  margin-top: -0.4rem;
+}
+.background-test-silver {
+  height: 30vh;
+  margin-top: -0.4rem;
+  background: #b8c6db;
+  background: linear-gradient(315deg, #b8c6db 0%, #f5f7fa 74%);
+}
+
+.img-container-between {
+  padding-top: 78%;
 }

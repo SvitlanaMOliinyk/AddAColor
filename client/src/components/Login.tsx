@@ -1,7 +1,7 @@
 import { useNavigate, Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { UserModel } from "./models/userModel.ts";
+import { UserModel } from "../models/userModel.ts";
 
 interface LoginProps {
   onLoginSuccessful: (user: UserModel) => void;

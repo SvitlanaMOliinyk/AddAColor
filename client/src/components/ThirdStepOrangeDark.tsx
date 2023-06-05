@@ -1,13 +1,12 @@
 import { MouseEvent, useState } from "react";
-import { ThirdStepOrangeDark } from "./ThirdStepOrangeDark.tsx";
-import { ThirdStepOrangeLight } from "./ThirdStepOrangeLight.tsx";
+import { Result } from "./Result.tsx";
 import { useNavigate } from "react-router-dom";
-interface SecondStepOrangeProps {
+
+interface ThirdStepOrangeDarkProps {
   photo: string;
   resultValue: string;
   hue: string;
   metal: string;
-  chroma: string;
   onValuesUpdated: (
     updatedPhoto: string,
     updatedHue: string,
@@ -16,35 +15,26 @@ interface SecondStepOrangeProps {
     updatedChroma: string
   ) => void;
 }
-
-export const SecondStepOrange = ({
+export const ThirdStepOrangeDark = ({
   photo,
   hue,
+  resultValue,
   metal,
-  chroma,
   onValuesUpdated,
-}: SecondStepOrangeProps) => {
-  const [dark, setDark] = useState<boolean>(false);
-  const [light, setLight] = useState<boolean>(false);
+}: ThirdStepOrangeDarkProps) => {
   const [isClicked, setIsClicked] = useState<boolean>(false);
-  const [resultValue, setResultValue] = useState<string>("");
+  const [chroma, setChroma] = useState<string>("");
   const navigate = useNavigate();
   const handleButtonClick = (e: MouseEvent) => {
     const target = e.target as HTMLButtonElement;
     if (target) {
       setIsClicked(true);
+      setChroma(target.value);
+      onValuesUpdated(photo, hue, metal, resultValue, target.value);
     }
-    if (target.value === "dark") {
-      setDark(true);
-    }
-    if (target.value === "light") {
-      setLight(true);
-    }
-    setResultValue(target.value);
-    onValuesUpdated(photo, hue, metal, target.value, chroma);
   };
   const handleBackClick = () => {
-    navigate("/goldSilver"); // Navigate back to the previous page
+    navigate("/secondStepOrange"); // Navigate back to the previous page
   };
   return (
     <section className="photo-section">
@@ -52,8 +42,8 @@ export const SecondStepOrange = ({
         <>
           <div className="img-container-one">
             <img src={photo} alt="userPhoto" width={300} />
-            <div className="background-test-orange-dark"></div>
-            <button value="dark" onClick={handleButtonClick}>
+            <div className="background-test-orange-gray"></div>
+            <button value="gray" onClick={handleButtonClick}>
               Click Me!
             </button>
           </div>
@@ -62,27 +52,19 @@ export const SecondStepOrange = ({
           </div>
           <div className="img-container-two">
             <img src={photo} alt="userPhoto" width={300} />
-            <div className="background-test-orange-light"></div>
-            <button value="light" onClick={handleButtonClick}>
+            <div className="background-test-orange-bright"></div>
+            <button value="bright" onClick={handleButtonClick}>
               Click Me!
             </button>
           </div>
         </>
-      ) : dark ? (
-        <ThirdStepOrangeDark
-          photo={photo}
-          resultValue={resultValue}
-          metal={metal}
-          hue={hue}
-          onValuesUpdated={onValuesUpdated}
-        />
       ) : (
-        <ThirdStepOrangeLight
+        <Result
           photo={photo}
-          resultValue={resultValue}
-          metal={metal}
           hue={hue}
-          onValuesUpdated={onValuesUpdated}
+          metal={metal}
+          resultValue={resultValue}
+          chroma={chroma}
         />
       )}
     </section>

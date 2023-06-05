@@ -1,11 +1,30 @@
 import { useState } from "react";
-import { UserModel } from "../components/models/userModel.ts";
+import { UserModel } from "../models/userModel.ts";
 import { FirstStep } from "../components/FirstStep.tsx";
 interface ProfileProps {
   loggedInUser: UserModel | null;
+  photo: string;
+  resultValue: string;
+  hue: string;
+  metal: string;
+  chroma: string;
+  onValuesUpdated: (
+    updatedPhoto: string,
+    updatedHue: string,
+    updatedMetal: string,
+    updatedResultValue: string,
+    updatedChroma: string
+  ) => void;
 }
 
-export const Profile = ({ loggedInUser }: ProfileProps) => {
+export const Profile = ({
+  loggedInUser,
+  hue,
+  metal,
+  resultValue,
+  chroma,
+  onValuesUpdated,
+}: ProfileProps) => {
   const [photo, setPhoto] = useState<string | null>(null);
   async function handleClick() {
     try {
@@ -16,6 +35,7 @@ export const Profile = ({ loggedInUser }: ProfileProps) => {
       const userPhoto = await response.json();
       console.log("userPhoto:", userPhoto);
       setPhoto(userPhoto.userPicture);
+      onValuesUpdated(userPhoto.userPicture, hue, metal, resultValue, chroma);
     } catch (error) {
       console.error(error);
     }
@@ -27,7 +47,14 @@ export const Profile = ({ loggedInUser }: ProfileProps) => {
           <h2>Hello {loggedInUser.userName}</h2>
           {photo ? (
             <>
-              <FirstStep photo={photo} />
+              <FirstStep
+                photo={photo}
+                onValuesUpdated={onValuesUpdated}
+                resultValue={""}
+                hue={""}
+                metal={""}
+                chroma={""}
+              />
             </>
           ) : (
             <>

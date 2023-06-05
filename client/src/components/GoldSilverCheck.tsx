@@ -1,8 +1,8 @@
 import { MouseEvent, useState } from "react";
-import { ThirdStepBlueDark } from "./ThirdStepBlueDark.tsx";
-import { ThirdStepBlueLight } from "./ThirdStepBlueLight.tsx";
+import { SecondStepBlue } from "./SecondStepBlue.tsx";
+import { SecondStepOrange } from "./SecondStepOrange.tsx";
 import { useNavigate } from "react-router-dom";
-interface SecondStepBlueProps {
+interface GoldSilverCheckProps {
   photo: string;
   resultValue: string;
   hue: string;
@@ -16,30 +16,30 @@ interface SecondStepBlueProps {
     updatedChroma: string
   ) => void;
 }
-
-export const SecondStepBlue = ({photo, hue, metal, chroma, onValuesUpdated}: SecondStepBlueProps) => {
-  const [dark, setDark] = useState<boolean>(false);
-  const [light, setLight] = useState<boolean>(false);
+export const GoldSilverCheck = ({ photo, resultValue, chroma, hue, onValuesUpdated }: GoldSilverCheckProps) => {
+  const [silver, setSilver] = useState<boolean>(false);
+  const [gold, setGold] = useState<boolean>(false);
   const [isClicked, setIsClicked] = useState<boolean>(false);
-  const [resultValue, setResultValue] = useState<string>("");
+  const [metal, setMetal] = useState<string>("");
   const navigate = useNavigate();
+
   const handleButtonClick = (e: MouseEvent) => {
     const target = e.target as HTMLButtonElement;
     if (target) {
       setIsClicked(true);
     }
-    if (target.value === "dark") {
-      setDark(true);
+    if (target.value === "silver") {
+      setSilver(true);
     }
-    if (target.value === "light") {
-      setLight(true);
+    if (target.value === "gold") {
+      setGold(true);
     }
-    setResultValue(target.value)
-    onValuesUpdated(photo, hue, metal, target.value, chroma);
+    setMetal(target.value)
+    onValuesUpdated(photo, hue, target.value, resultValue, chroma);
     console.log("Target value:", target.value)
   };
   const handleBackClick = () => {
-    navigate("/goldSilver"); // Navigate back to the previous page
+    navigate("/firstStep"); // Navigate back to the previous page
   };
   return (
     <section className="photo-section">
@@ -47,8 +47,8 @@ export const SecondStepBlue = ({photo, hue, metal, chroma, onValuesUpdated}: Sec
         <>
           <div className="img-container-one">
             <img src={photo} alt="userPhoto" width={300} />
-            <div className="background-test-blue-dark"></div>
-            <button value="dark" onClick={handleButtonClick}>
+            <div className="background-test-silver"></div>
+            <button value="silver" onClick={handleButtonClick}>
               Click Me!
             </button>
           </div>
@@ -57,17 +57,20 @@ export const SecondStepBlue = ({photo, hue, metal, chroma, onValuesUpdated}: Sec
           </div>
           <div className="img-container-two">
             <img src={photo} alt="userPhoto" width={300} />
-            <div className="background-test-blue-light"></div>
-            <button value="light" onClick={handleButtonClick}>
+            <div className="background-test-gold"></div>
+            <button value="gold" onClick={handleButtonClick}>
               Click Me!
             </button>
           </div>
+         
         </>
-      ) : dark ? (
-        <ThirdStepBlueDark photo={photo} resultValue={resultValue} metal={metal}  hue={hue} onValuesUpdated={onValuesUpdated}/>
+      ) : silver ? (
+        <SecondStepBlue photo={photo} hue={hue} metal={metal} resultValue={resultValue} chroma={chroma} onValuesUpdated={onValuesUpdated}/>
       ) : (
-        <ThirdStepBlueLight photo={photo} resultValue={resultValue} metal={metal} hue={hue} onValuesUpdated={onValuesUpdated}/>
+        <SecondStepOrange photo={photo} hue={hue} metal={metal} resultValue={resultValue} chroma={chroma} onValuesUpdated={onValuesUpdated}/>
       )}
+      
+      
     </section>
   );
-}
+};
