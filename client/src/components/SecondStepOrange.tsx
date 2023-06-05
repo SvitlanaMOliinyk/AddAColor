@@ -1,17 +1,34 @@
-
 import { MouseEvent, useState } from "react";
 import { ThirdStepOrangeDark } from "./ThirdStepOrangeDark.tsx";
 import { ThirdStepOrangeLight } from "./ThirdStepOrangeLight.tsx";
+import { useNavigate } from "react-router-dom";
 interface SecondStepOrangeProps {
   photo: string;
+  resultValue: string;
   hue: string;
+  metal: string;
+  chroma: string;
+  onValuesUpdated: (
+    updatedPhoto: string,
+    updatedHue: string,
+    updatedMetal: string,
+    updatedResultValue: string,
+    updatedChroma: string
+  ) => void;
 }
 
-export const SecondStepOrange = ({photo, hue}: SecondStepOrangeProps ) => {
+export const SecondStepOrange = ({
+  photo,
+  hue,
+  metal,
+  chroma,
+  onValuesUpdated,
+}: SecondStepOrangeProps) => {
   const [dark, setDark] = useState<boolean>(false);
   const [light, setLight] = useState<boolean>(false);
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const [resultValue, setResultValue] = useState<string>("");
+  const navigate = useNavigate();
   const handleButtonClick = (e: MouseEvent) => {
     const target = e.target as HTMLButtonElement;
     if (target) {
@@ -19,12 +36,15 @@ export const SecondStepOrange = ({photo, hue}: SecondStepOrangeProps ) => {
     }
     if (target.value === "dark") {
       setDark(true);
-      
     }
     if (target.value === "light") {
       setLight(true);
     }
-    setResultValue(target.value)
+    setResultValue(target.value);
+    onValuesUpdated(photo, hue, metal, target.value, chroma);
+  };
+  const handleBackClick = () => {
+    navigate("/goldSilver"); // Navigate back to the previous page
   };
   return (
     <section className="photo-section">
@@ -37,6 +57,9 @@ export const SecondStepOrange = ({photo, hue}: SecondStepOrangeProps ) => {
               Click Me!
             </button>
           </div>
+          <div className="img-container-between">
+            <button onClick={handleBackClick}>Back</button>
+          </div>
           <div className="img-container-two">
             <img src={photo} alt="userPhoto" width={300} />
             <div className="background-test-orange-light"></div>
@@ -46,10 +69,22 @@ export const SecondStepOrange = ({photo, hue}: SecondStepOrangeProps ) => {
           </div>
         </>
       ) : dark ? (
-        <ThirdStepOrangeDark photo={photo} resultValue={resultValue} hue={hue}/>
+        <ThirdStepOrangeDark
+          photo={photo}
+          resultValue={resultValue}
+          metal={metal}
+          hue={hue}
+          onValuesUpdated={onValuesUpdated}
+        />
       ) : (
-        <ThirdStepOrangeLight photo={photo} resultValue={resultValue} hue={hue}/>
+        <ThirdStepOrangeLight
+          photo={photo}
+          resultValue={resultValue}
+          metal={metal}
+          hue={hue}
+          onValuesUpdated={onValuesUpdated}
+        />
       )}
     </section>
   );
-}
+};
