@@ -1,6 +1,7 @@
 import { ReactElement } from "react";
 import { NavLink } from "react-router-dom";
 import { UserModel } from "../models/userModel.ts";
+import colorDrop from "../assets/colorDrop.png";
 
 interface NavbarProps {
   loggedInUser: UserModel | null;
@@ -8,7 +9,6 @@ interface NavbarProps {
 }
 
 function Navbar({ loggedInUser, onLogout }: NavbarProps): ReactElement {
-  
   async function logout() {
     try {
       await fetch(`${import.meta.env.VITE_BASE_URL}/api/user/logout`, {
@@ -23,21 +23,39 @@ function Navbar({ loggedInUser, onLogout }: NavbarProps): ReactElement {
 
   return (
     <nav className="shadow-navbar">
-      <div className="logo">LOGO</div>
+      <div className="logo-img">
+        <img className="logo" src={colorDrop} alt="colorDrop" width="100" />
+      </div>
       <div className="navlinks">
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="about">About</NavLink>
+        <NavLink className="hover:bg-blue-500 hover:text-white" to="/">
+          Home
+        </NavLink>
+        <NavLink className="hover:bg-blue-500 hover:text-white" to="about">
+          About
+        </NavLink>
         {loggedInUser ? (
           <>
-          <NavLink to="/profile">Profile</NavLink>
-          <NavLink to="/" onClick={logout}>
-            Log Out
-          </NavLink>
+            <NavLink
+              className="hover:bg-blue-500 hover:text-white"
+              to="/profile"
+            >
+              Profile
+            </NavLink>
+            <NavLink to="/" onClick={logout}>
+              Log Out
+            </NavLink>
           </>
         ) : (
           <>
-            <NavLink to="/register">Register</NavLink>
-            <NavLink to="/login">Log In</NavLink>
+            <NavLink
+              className="hover:bg-blue-500 hover:text-white"
+              to="/register"
+            >
+              Register
+            </NavLink>
+            <NavLink className="hover:bg-blue-500 hover:text-white" to="/login">
+              Log In
+            </NavLink>
           </>
         )}
       </div>

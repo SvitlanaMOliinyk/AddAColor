@@ -3,6 +3,7 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 import { UserModel } from "../models/userModel.ts";
 
+
 interface RegisterProps {
   onRegisterSuccessful: (user: UserModel) => void;
 }
@@ -57,12 +58,13 @@ export const Register = ({ onRegisterSuccessful }: RegisterProps) => {
     });
 
   return (
-    <main className="content register">
+    <main className="content register bg-gradient-to-bl from-gray-100 to-blue-200 flex justify-center">
       <form
         onSubmit={handleSubmit}
-        className="register-form"
+        className="register-form w-1/2"
         autoComplete="off"
       >
+        <h2 className="font-bold">Sign up to your account</h2>
         <label htmlFor="userName">User Name</label>
         <div className="register-field">
           <input
