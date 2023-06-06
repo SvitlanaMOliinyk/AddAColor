@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { UserModel } from "../models/userModel.ts";
 
+
 interface LoginProps {
   onLoginSuccessful: (user: UserModel) => void;
 }
@@ -45,12 +46,14 @@ export const Login = ({ onLoginSuccessful }: LoginProps) => {
   });
 
   return (
-    <main className="content login">
+    <main className="content login bg-gradient-to-bl from-gray-100 to-blue-200 flex justify-center">
+     
       <form
         onSubmit={handleSubmit}
-        className="register-form"
+        className="register-form w-1/2" 
         autoComplete="off"
       >
+         <h2 className="font-bold ">Sign in to your account</h2>
         <div className="register-field">
           <input
             type="text"
