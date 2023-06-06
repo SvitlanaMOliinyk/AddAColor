@@ -44,7 +44,9 @@ export const Profile = ({
     <>
       {loggedInUser ? (
         <main className="content profile flex flex-col justify-center">
-          <h2 className="font-bold tracking-wide text-xl mb-4">Hello {loggedInUser.userName}</h2>
+          <h2 className="font-bold tracking-wide text-xl mb-4">
+            Hello {loggedInUser.userName}
+          </h2>
           {photo ? (
             <div className="self-center">
               <FirstStep
@@ -54,13 +56,14 @@ export const Profile = ({
                 hue={""}
                 metal={""}
                 chroma={""}
-                
               />
             </div>
           ) : (
             <>
               <h3 className="mt-12">Let's start checking your color palette</h3>
-              <button className="mt-8" onClick={handleClick}>Start examination</button>
+              <button className="mt-8" onClick={handleClick}>
+                Start examination
+              </button>
             </>
           )}
         </main>
