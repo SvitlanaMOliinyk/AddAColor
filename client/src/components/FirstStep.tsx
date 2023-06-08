@@ -15,8 +15,6 @@ interface FirstStepProps {
   ) => void;
 }
 export const FirstStep = ({ photo, resultValue, metal, chroma, onValuesUpdated }: FirstStepProps) => {
-  // const [blue, setBlue] = useState<boolean>(false);
-  // const [orange, setOrange] = useState<boolean>(false);
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const [hue, setHue] = useState<string>("");
 
@@ -26,7 +24,6 @@ export const FirstStep = ({ photo, resultValue, metal, chroma, onValuesUpdated }
       setIsClicked(true);
     setHue(target.value)
     onValuesUpdated(photo, target.value, metal, resultValue, chroma);
-    console.log("Target value:", target.value)
     }
   };
   

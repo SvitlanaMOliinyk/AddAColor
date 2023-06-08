@@ -29,7 +29,7 @@ export const ThirdStepBlueDark = ({photo, hue, resultValue, metal, onValuesUpdat
     }
   };
   const handleBackClick = () => {
-    navigate("/secondStepBlue"); // Navigate back to the previous page
+    navigate("/secondStepBlue"); 
   };
   return (
     <section className="photo-section">

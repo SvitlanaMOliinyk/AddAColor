@@ -15,7 +15,13 @@ interface ThirdStepOrangeLightProps {
     updatedChroma: string
   ) => void;
 }
-export const ThirdStepOrangeLight = ({photo, hue, resultValue, metal, onValuesUpdated}: ThirdStepOrangeLightProps) => {
+export const ThirdStepOrangeLight = ({
+  photo,
+  hue,
+  resultValue,
+  metal,
+  onValuesUpdated,
+}: ThirdStepOrangeLightProps) => {
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const [chroma, setChroma] = useState<string>("");
   const navigate = useNavigate();
@@ -23,12 +29,12 @@ export const ThirdStepOrangeLight = ({photo, hue, resultValue, metal, onValuesUp
     const target = e.target as HTMLButtonElement;
     if (target) {
       setIsClicked(true);
-    setChroma(target.value)
-    onValuesUpdated(photo, hue, metal, resultValue, target.value);
+      setChroma(target.value);
+      onValuesUpdated(photo, hue, metal, resultValue, target.value);
     }
   };
   const handleBackClick = () => {
-    navigate("/secondStepOrange"); // Navigate back to the previous page
+    navigate("/secondStepOrange");
   };
   return (
     <section className="photo-section">
@@ -42,7 +48,7 @@ export const ThirdStepOrangeLight = ({photo, hue, resultValue, metal, onValuesUp
             </button>
           </div>
           <div className="img-container-between">
-          <button onClick={handleBackClick}>Back</button>
+            <button onClick={handleBackClick}>Back</button>
           </div>
           <div className="img-container-two">
             <img src={photo} alt="userPhoto" width={300} />
@@ -53,8 +59,14 @@ export const ThirdStepOrangeLight = ({photo, hue, resultValue, metal, onValuesUp
           </div>
         </>
       ) : (
-        <Result photo={photo} hue={hue} metal={metal} resultValue={resultValue} chroma={chroma}/>
+        <Result
+          photo={photo}
+          hue={hue}
+          metal={metal}
+          resultValue={resultValue}
+          chroma={chroma}
+        />
       )}
     </section>
   );
-}
+};

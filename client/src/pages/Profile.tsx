@@ -33,7 +33,6 @@ export const Profile = ({
         { method: "GET" }
       );
       const userPhoto = await response.json();
-      console.log("userPhoto:", userPhoto);
       setPhoto(userPhoto.userPicture);
       onValuesUpdated(userPhoto.userPicture, hue, metal, resultValue, chroma);
     } catch (error) {

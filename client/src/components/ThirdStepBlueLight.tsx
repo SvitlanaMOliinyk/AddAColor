@@ -15,7 +15,13 @@ interface ThirdStepBlueLightProps {
     updatedChroma: string
   ) => void;
 }
-export const ThirdStepBlueLight = ({photo, hue, resultValue, metal, onValuesUpdated}:ThirdStepBlueLightProps ) => {
+export const ThirdStepBlueLight = ({
+  photo,
+  hue,
+  resultValue,
+  metal,
+  onValuesUpdated,
+}: ThirdStepBlueLightProps) => {
   // const [gray, setGray] = useState<boolean>(false);
   // const [bright, setBright] = useState<boolean>(false);
   const [isClicked, setIsClicked] = useState<boolean>(false);
@@ -26,17 +32,14 @@ export const ThirdStepBlueLight = ({photo, hue, resultValue, metal, onValuesUpda
     const target = e.target as HTMLButtonElement;
     if (target) {
       setIsClicked(true);
-    setChroma(target.value)
-    onValuesUpdated(photo, hue, metal, resultValue, target.value);
+      setChroma(target.value);
+      onValuesUpdated(photo, hue, metal, resultValue, target.value);
     }
-    console.log("Target value:", target.value)
-    console.log("Result:", target.value, hue, resultValue)
   };
   const handleBackClick = () => {
-    navigate("/secondStepBlue"); // Navigate back to the previous page
+    navigate("/secondStepBlue");
   };
   return (
-
     <section className="photo-section">
       {!isClicked ? (
         <>
@@ -48,7 +51,7 @@ export const ThirdStepBlueLight = ({photo, hue, resultValue, metal, onValuesUpda
             </button>
           </div>
           <div className="img-container-between">
-          <button onClick={handleBackClick}>Back</button>
+            <button onClick={handleBackClick}>Back</button>
           </div>
           <div className="img-container-two">
             <img src={photo} alt="userPhoto" width={300} />
@@ -59,8 +62,14 @@ export const ThirdStepBlueLight = ({photo, hue, resultValue, metal, onValuesUpda
           </div>
         </>
       ) : (
-        <Result photo={photo} hue={hue} metal={metal} resultValue={resultValue} chroma={chroma}/>
+        <Result
+          photo={photo}
+          hue={hue}
+          metal={metal}
+          resultValue={resultValue}
+          chroma={chroma}
+        />
       )}
     </section>
   );
-}
+};

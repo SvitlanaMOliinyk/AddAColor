@@ -36,10 +36,9 @@ export const GoldSilverCheck = ({ photo, resultValue, chroma, hue, onValuesUpdat
     }
     setMetal(target.value)
     onValuesUpdated(photo, hue, target.value, resultValue, chroma);
-    console.log("Target value:", target.value)
   };
   const handleBackClick = () => {
-    navigate("/firstStep"); // Navigate back to the previous page
+    navigate("/firstStep");
   };
   return (
     <section className="photo-section">

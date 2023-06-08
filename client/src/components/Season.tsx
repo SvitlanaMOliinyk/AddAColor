@@ -2,11 +2,13 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 
+
 // type SeasonProps = { season: string };
 type KeyParams = { key: string };
 type PaletteProps = { 
     paletteName: string,
     url: string,
+    url_two: string,
     _id: string
 }
 
@@ -30,11 +32,16 @@ export const Season = () => {
   }, [key]);
 
   return (
-    <main className="content season">
+    <main className="content season flex ">
         
-        <h2>{palette[0]?.paletteName}</h2>
-        <div className="img-container">
+        <div className="img-container pt-4 mr-10 flex flex-col">
+        <h2 className="font-bold self-center text-4xl pb-4">{palette[0]?.paletteName}:Best Colors</h2>
             <img src={palette[0]?.url} alt={palette[0]?.paletteName} width="400"/>
+        </div>
+        
+        <div className="img-container pt-4 flex flex-col">
+        <h2 className="font-bold self-center text-2xl pb-2">Colors to avoid</h2>
+            <img src={palette[0]?.url_two} alt={palette[0]?.paletteName} width="400"/>
         </div>
      
     </main>

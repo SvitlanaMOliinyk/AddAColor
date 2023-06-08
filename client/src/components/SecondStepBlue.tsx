@@ -36,10 +36,9 @@ export const SecondStepBlue = ({photo, hue, metal, chroma, onValuesUpdated}: Sec
     }
     setResultValue(target.value)
     onValuesUpdated(photo, hue, metal, target.value, chroma);
-    console.log("Target value:", target.value)
   };
   const handleBackClick = () => {
-    navigate("/goldSilver"); // Navigate back to the previous page
+    navigate("/goldSilver");
   };
   return (
     <section className="photo-section">
