@@ -44,7 +44,7 @@ export const SecondStepOrange = ({
     onValuesUpdated(photo, hue, metal, target.value, chroma);
   };
   const handleBackClick = () => {
-    navigate("/goldSilver"); // Navigate back to the previous page
+    navigate("/goldSilver");
   };
   return (
     <section className="photo-section">

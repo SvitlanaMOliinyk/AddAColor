@@ -34,7 +34,7 @@ export const ThirdStepOrangeDark = ({
     }
   };
   const handleBackClick = () => {
-    navigate("/secondStepOrange"); // Navigate back to the previous page
+    navigate("/secondStepOrange");
   };
   return (
     <section className="photo-section">

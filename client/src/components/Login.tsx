@@ -24,7 +24,6 @@ export const Login = ({ onLoginSuccessful }: LoginProps) => {
       }
     );
     const user = await response.json();
-    console.log("User after log in:", user)
     onLoginSuccessful(user);
     setTimeout(() => {
       navigate("/");
