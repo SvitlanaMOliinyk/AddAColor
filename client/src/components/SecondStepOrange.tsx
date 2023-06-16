@@ -49,25 +49,37 @@ export const SecondStepOrange = ({
   return (
     <section className="photo-section">
       {!isClicked ? (
-        <>
-          <div className="img-container-one">
-            <img src={photo} alt="userPhoto" width={300} />
-            <div className="background-test-orange-dark"></div>
-            <button value="dark" onClick={handleButtonClick}>
-              Click Me!
-            </button>
+        <div className="wrapper flex flex-col">
+          <div className="img-container-both flex space-x-12">
+            <div className="img-container-one">
+              <img src={photo} alt="userPhoto" width={300} />
+              <div className="background-test-orange-dark"></div>
+              <button
+                value="dark"
+                onClick={handleButtonClick}
+                className="w-full"
+              >
+                Click Me!
+              </button>
+            </div>
+
+            <div className="img-container-two">
+              <img src={photo} alt="userPhoto" width={300} />
+              <div className="background-test-orange-light"></div>
+              <button
+                value="light"
+                onClick={handleButtonClick}
+                className="w-full"
+              >
+                Click Me!
+              </button>
+            </div>
           </div>
-          <div className="img-container-between">
-            <button onClick={handleBackClick}>Back</button>
-          </div>
-          <div className="img-container-two">
-            <img src={photo} alt="userPhoto" width={300} />
-            <div className="background-test-orange-light"></div>
-            <button value="light" onClick={handleButtonClick}>
-              Click Me!
-            </button>
-          </div>
-        </>
+
+          <button onClick={handleBackClick} className="w-full bg-red-100">
+            Back
+          </button>
+        </div>
       ) : dark ? (
         <ThirdStepOrangeDark
           photo={photo}

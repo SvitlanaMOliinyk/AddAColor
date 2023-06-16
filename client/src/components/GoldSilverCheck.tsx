@@ -43,26 +43,28 @@ export const GoldSilverCheck = ({ photo, resultValue, chroma, hue, onValuesUpdat
   return (
     <section className="photo-section">
       {!isClicked ? (
-        <>
+        <div className="wrapper flex flex-col">
+          <div className="img-container-both flex space-x-12">
           <div className="img-container-one">
             <img src={photo} alt="userPhoto" width={300} />
             <div className="background-test-silver"></div>
-            <button value="silver" onClick={handleButtonClick}>
-              Click Me!
-            </button>
-          </div>
-          <div className="img-container-between">
-          <button onClick={handleBackClick}>Back</button>
-          </div>
-          <div className="img-container-two">
-            <img src={photo} alt="userPhoto" width={300} />
-            <div className="background-test-gold"></div>
-            <button value="gold" onClick={handleButtonClick}>
+            <button value="silver" onClick={handleButtonClick} className="w-full">
               Click Me!
             </button>
           </div>
          
-        </>
+          <div className="img-container-two">
+            <img src={photo} alt="userPhoto" width={300} />
+            <div className="background-test-gold"></div>
+            <button value="gold" onClick={handleButtonClick} className="w-full">
+              Click Me!
+            </button>
+          </div>
+          </div>
+          
+          <button onClick={handleBackClick} className="w-full bg-red-100">Back</button>
+          
+        </div>
       ) : silver ? (
         <SecondStepBlue photo={photo} hue={hue} metal={metal} resultValue={resultValue} chroma={chroma} onValuesUpdated={onValuesUpdated}/>
       ) : (

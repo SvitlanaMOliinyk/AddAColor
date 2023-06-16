@@ -16,7 +16,13 @@ interface ThirdStepBlueDarkProps {
   ) => void;
 }
 
-export const ThirdStepBlueDark = ({photo, hue, resultValue, metal, onValuesUpdated}:ThirdStepBlueDarkProps) => {
+export const ThirdStepBlueDark = ({
+  photo,
+  hue,
+  resultValue,
+  metal,
+  onValuesUpdated,
+}: ThirdStepBlueDarkProps) => {
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const [chroma, setChroma] = useState<string>("");
   const navigate = useNavigate();
@@ -24,38 +30,56 @@ export const ThirdStepBlueDark = ({photo, hue, resultValue, metal, onValuesUpdat
     const target = e.target as HTMLButtonElement;
     if (target) {
       setIsClicked(true);
-    setChroma(target.value)
-    onValuesUpdated(photo, hue, metal, resultValue, target.value);
+      setChroma(target.value);
+      onValuesUpdated(photo, hue, metal, resultValue, target.value);
     }
   };
   const handleBackClick = () => {
-    navigate("/secondStepBlue"); 
+    navigate("/secondStepBlue");
   };
   return (
     <section className="photo-section">
       {!isClicked ? (
-        <>
-          <div className="img-container-one">
-            <img src={photo} alt="userPhoto" width={300} />
-            <div className="background-test-blue-gray"></div>
-            <button value="gray" onClick={handleButtonClick}>
-              Click Me!
-            </button>
+        <div className="wrapper flex flex-col">
+          <div className="img-container-both flex space-x-12">
+            <div className="img-container-one">
+              <img src={photo} alt="userPhoto" width={300} />
+              <div className="background-test-blue-gray"></div>
+              <button
+                value="gray"
+                onClick={handleButtonClick}
+                className="w-full"
+              >
+                Click Me!
+              </button>
+            </div>
+
+            <div className="img-container-two">
+              <img src={photo} alt="userPhoto" width={300} />
+              <div className="background-test-blue-bright"></div>
+              <button
+                value="bright"
+                onClick={handleButtonClick}
+                className="w-full"
+              >
+                Click Me!
+              </button>
+            </div>
           </div>
-          <div className="img-container-between">
-          <button onClick={handleBackClick}>Back</button>
-          </div>
-          <div className="img-container-two">
-            <img src={photo} alt="userPhoto" width={300} />
-            <div className="background-test-blue-bright"></div>
-            <button value="bright" onClick={handleButtonClick}>
-              Click Me!
-            </button>
-          </div>
-        </>
+
+          <button onClick={handleBackClick} className="w-full bg-red-100">
+            Back
+          </button>
+        </div>
       ) : (
-        <Result photo={photo} hue={hue} metal={metal} resultValue={resultValue} chroma={chroma}/>
+        <Result
+          photo={photo}
+          hue={hue}
+          metal={metal}
+          resultValue={resultValue}
+          chroma={chroma}
+        />
       )}
     </section>
   );
-}
+};

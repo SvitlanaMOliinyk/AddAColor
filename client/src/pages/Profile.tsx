@@ -43,7 +43,7 @@ export const Profile = ({
     <>
       {loggedInUser ? (
         <main className="content profile flex flex-col justify-center">
-          <h2 className="font-bold tracking-wide text-xl mb-4">
+          <h2 className="font-bold tracking-wide text-xl text-center">
             Hello {loggedInUser.userName}
           </h2>
           {photo ? (
@@ -59,7 +59,7 @@ export const Profile = ({
             </div>
           ) : (
             <>
-              <h3 className="mt-12">Let's start checking your color palette</h3>
+              <h3 className="mt-12 text-xl">Let's start checking your color palette</h3>
               <button className="mt-8" onClick={handleClick}>
                 Start examination
               </button>

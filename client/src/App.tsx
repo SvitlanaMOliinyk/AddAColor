@@ -44,9 +44,14 @@ function App() {
     async function getLoggedInUser() {
       try {
         const response = await fetch("/api/user", { method: "GET" });
-        const responseResult = await response.json();
-        console.log("responseUser:", responseResult);
-        setLoggedInUser(responseResult);
+        if (response.status === 401) {
+          // Session is expired or not authenticated
+          setLoggedInUser(null);
+        } else {
+          const responseResult = await response.json();
+          console.log("responseUser:", responseResult);
+          setLoggedInUser(responseResult);
+        }
       } catch (error) {
         console.error(error);
       }
