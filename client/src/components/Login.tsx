@@ -1,33 +1,53 @@
 import { useNavigate, Link } from "react-router-dom";
+import { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { UserModel } from "../models/userModel.ts";
-
 
 interface LoginProps {
   onLoginSuccessful: (user: UserModel) => void;
 }
 
+interface LoginFormValues {
+  userName: string;
+  password: string;
+}
+
 export const Login = ({ onLoginSuccessful }: LoginProps) => {
   const navigate = useNavigate();
-  const onSubmit = async () => {
-    const { userName, password } = values;
-    const response = await fetch(
-      `${import.meta.env.VITE_BASE_URL}/api/user/login`,
-      {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({ userName, password }),
+  const [generalError, setGeneralError] = useState<string>("");
+  const onSubmit = async (values: LoginFormValues) => {
+    try {
+      const { userName, password } = values;
+      const response = await fetch(
+        `${import.meta.env.VITE_BASE_URL}/api/user/login`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({ userName, password }),
+        }
+      );
+      if (response.status === 201) {
+        const user = await response.json();
+        onLoginSuccessful(user);
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
+      } else {
+        if (response.status === 401) {
+          throw new Error("Please, provide correct credentials");
+        } else {
+          const errorResponse = await response.json();
+          throw new Error(errorResponse.message);
+        }
       }
-    );
-    const user = await response.json();
-    onLoginSuccessful(user);
-    setTimeout(() => {
-      navigate("/");
-    }, 2000);
+    } catch (error: any) {
+      console.error(error);
+      setGeneralError(error.message);
+    }
   };
 
   const validationSchema = Yup.object({
@@ -35,24 +55,24 @@ export const Login = ({ onLoginSuccessful }: LoginProps) => {
     password: Yup.string().required("Please enter your password!"),
   });
 
-  const { values, errors, touched, getFieldProps, handleSubmit } = useFormik({
-    initialValues: {
-      userName: "",
-      password: "",
-    },
-    validationSchema,
-    onSubmit,
-  });
+  const { errors, touched, getFieldProps, handleSubmit } =
+    useFormik<LoginFormValues>({
+      initialValues: {
+        userName: "",
+        password: "",
+      },
+      validationSchema,
+      onSubmit,
+    });
 
   return (
     <main className="content login bg-gradient-to-bl from-gray-100 to-blue-200 flex justify-center">
-     
       <form
         onSubmit={handleSubmit}
-        className="register-form w-1/2" 
+        className="register-form w-1/2"
         autoComplete="off"
       >
-         <h2 className="font-bold ">Sign in to your account</h2>
+        <h2 className="font-bold ">Sign in to your account</h2>
         <div className="register-field">
           <input
             type="text"
@@ -78,12 +98,19 @@ export const Login = ({ onLoginSuccessful }: LoginProps) => {
           ></input>
 
           <div className="message-container">
-            {touched.password && errors.password ? (
-              <>{errors.password}</>
+            {touched.userName && errors.userName ? (
+              <>{errors.userName}</>
             ) : (
               <> </>
             )}
           </div>
+        </div>
+        <div className="message-container">
+          {generalError ? (
+            <div className="message-container">{generalError}</div>
+          ) : (
+            <> </>
+          )}
         </div>
         <button type="submit">Log in</button>
         <div className="register-link">

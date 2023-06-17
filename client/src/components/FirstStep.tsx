@@ -31,17 +31,17 @@ export const FirstStep = ({ photo, resultValue, metal, chroma, onValuesUpdated }
     <section className="photo-section">
       {!isClicked ? (
         <>
-          <div className="img-container-one">
+          <div className="img-container-one flex flex-col justify-center items-center">
             <img src={photo} alt="userPhoto" width={300} />
             <div className="background-test-one"></div>
-            <button value="blue" onClick={handleButtonClick}>
+            <button value="blue" onClick={handleButtonClick} className="w-full">
               Click Me!
             </button>
           </div>
-          <div className="img-container-two">
+          <div className="img-container-two flex flex-col justify-center items-center">
             <img src={photo} alt="userPhoto" width={300} />
             <div className="background-test-two"></div>
-            <button value="orange" onClick={handleButtonClick}>
+            <button value="orange" onClick={handleButtonClick} className="w-full">
               Click Me!
             </button>
           </div>
