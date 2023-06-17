@@ -67,7 +67,7 @@ export const Profile = ({
           )}
         </main>
       ) : (
-        <div>Log in please</div>
+        <div className="mt-12 text-xl font-bold text-center">Log in please</div>
       )}
     </>
   );
